@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#090909">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>Sunay Hanım'a Özel</title>
+<title>Buluşma Değerlendirme Formu</title>
 <style>
 :root{--bg:#070707;--paper:#f4eee7;--muted:#b8aaa5;--red:#9d3045;--red2:#c84b63;--line:#3b292d}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--paper)}
@@ -19,209 +19,187 @@ body{font-family:Georgia,"Times New Roman",serif;overflow-x:hidden}
 @keyframes floatLights { 0% { opacity: 0.7; transform: scale(1); } 100% { opacity: 1; transform: scale(1.1); } }
 
 .noise{position:fixed;inset:0;z-index:-2;opacity:.035;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.card{width:min(450px,100%);text-align:center; position: relative;}
+.card{width:min(450px,100%);text-align:center; position: relative; border:1px solid #52383e;border-radius:28px;padding:34px 24px 26px;background:rgba(12,9,10,.78);box-shadow:0 30px 100px rgba(0,0,0,.8), inset 0 0 20px rgba(143,39,58,0.1);backdrop-filter:blur(15px)}
 .fade{animation:fade 1s cubic-bezier(0.2, 0.8, 0.2, 1) both}
 @keyframes fade{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
 
-/* Geri Butonu */
-.back-btn{position:absolute; top:20px; left:20px; background:none; border:none; color:var(--muted); font:12px Arial,sans-serif; text-transform:uppercase; letter-spacing:1px; cursor:pointer; padding:10px; opacity:0.7; transition:0.3s; z-index:10;}
-.back-btn:hover{opacity:1; color:#fff; transform:translateX(-3px);}
-
 .eyebrow{font:10px Arial,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#b49fa0}
-.logo{margin:30px 0 24px;font-size:44px;line-height:1; text-shadow: 0 0 20px rgba(189,124,135,0.4);}
-h1{font-weight:400;font-size:clamp(30px,9vw,48px);line-height:1.1;margin:0 0 18px}
-h2{font-size:33px;font-weight:400;margin:8px 0 20px}
+.logo{margin:20px 0 15px;font-size:36px;line-height:1; text-shadow: 0 0 20px rgba(189,124,135,0.4);}
+h2{font-size:26px;font-weight:400;margin:8px 0 20px; color:#fff;}
 p{font:14px/1.75 Arial,sans-serif;color:#c9beb9;margin:10px 0}
-.question{font-family:Georgia,serif;color:#f7f2ed;font-size:18px;margin-top:28px}
-.btnrow{display:flex;gap:11px;justify-content:center;margin-top:30px}
+.divider{height:1px;background:linear-gradient(90deg,transparent,#6b4249,transparent);margin:20px 0}
+
+/* Anket Soruları */
+.survey-group { text-align: left; margin-bottom: 25px; }
+.question-title { font-size: 15px; font-weight: bold; color: #f4eee7; margin-bottom: 12px; font-family: Georgia, serif; }
+
+/* Özel Radyo Butonları */
+.option-label {
+    display: block;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    border: 1px solid #3b292d;
+    border-radius: 12px;
+    background: rgba(20, 15, 16, 0.6);
+    color: #c9beb9;
+    font: 13px Arial, sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 45px;
+}
+.option-label:hover { border-color: #6b4249; background: rgba(30, 20, 22, 0.8); transform: translateX(3px); }
+.option-label input { position: absolute; opacity: 0; cursor: pointer; }
+.checkmark { position: absolute; top: 13px; left: 15px; height: 18px; width: 18px; background-color: #1a1214; border: 1px solid #51383e; border-radius: 50%; transition: 0.3s; }
+.option-label input:checked ~ .checkmark { background-color: #b73e56; border-color: #b73e56; box-shadow: 0 0 10px rgba(183,62,86,0.5); }
+.option-label input:checked ~ .checkmark:after { content: ""; position: absolute; display: block; top: 5px; left: 5px; width: 6px; height: 6px; border-radius: 50%; background: white; }
+.option-label input:checked ~ .label-text { color: #fff; font-weight: bold; }
+
+/* Puanlama Yıldızları */
+.stars { display: flex; gap: 5px; justify-content: center; flex-direction: row-reverse; margin-bottom: 15px; }
+.stars input { display: none; }
+.stars label { font-size: 30px; color: #3b292d; cursor: pointer; transition: 0.3s; }
+.stars label:hover, .stars label:hover ~ label, .stars input:checked ~ label { color: #b73e56; text-shadow: 0 0 15px rgba(183,62,86,0.6); }
 
 /* Buton ve Parlama Efektleri */
-.btn{appearance:none;border:1px solid #51383e;background:#140f10;color:#fff;border-radius:999px;padding:15px 23px;font:13px Arial,sans-serif;cursor:pointer;transition:all .3s cubic-bezier(0.25, 0.8, 0.25, 1);min-width:120px; position:relative;}
+.btn{appearance:none;border:1px solid #51383e;background:#140f10;color:#fff;border-radius:999px;padding:16px 25px;font: 14px Arial,sans-serif; font-weight:bold; cursor:pointer;transition:all .3s cubic-bezier(0.25, 0.8, 0.25, 1);width:100%; margin-top:10px;}
 .btn.primary{background:linear-gradient(135deg,#8f263d,#b73e56);border-color:#b3485c;box-shadow:0 8px 25px rgba(146,35,58,.3), 0 0 15px rgba(183,62,86,0.2);}
 .btn.primary:hover{transform:translateY(-2px) scale(1.02); box-shadow:0 12px 30px rgba(146,35,58,.5), 0 0 25px rgba(183,62,86,0.6);}
 .btn:active{transform:scale(.95)!important;}
 
-/* Hayır butonu için kayma animasyonu */
-#noBtn{transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);}
-
-.tiny{font:10px/1.5 Arial,sans-serif;color:#746a67;margin-top:20px}
 .hidden{display:none!important}
-.reveal{animation:reveal 1s cubic-bezier(.2,.8,.2,1) both}
-@keyframes reveal{from{opacity:0;transform:translateY(40px) scale(.95)}to{opacity:1;transform:none}}
-
-.invite{border:1px solid #52383e;border-radius:28px;padding:34px 24px 26px;background:rgba(12,9,10,.78);box-shadow:0 30px 100px rgba(0,0,0,.8), inset 0 0 20px rgba(143,39,58,0.1);backdrop-filter:blur(15px)}
-.orn{color:#bd7c87;font-size:19px;letter-spacing:.4em}
-.name{font-size:24px;letter-spacing:.03em;margin:8px 0; color:#fff;}
-.divider{height:1px;background:linear-gradient(90deg,transparent,#6b4249,transparent);margin:25px 0}
-.details{display:grid;gap:14px;text-align:left}
-.detail{display:flex;gap:14px;align-items:center;padding:13px 12px;border:1px solid #2c2023;border-radius:15px;background:rgba(14,11,12,0.8); transition:0.3s;}
-.detail:hover{border-color:#52383e; transform:translateX(3px);}
-.icon{width:29px;text-align:center;font-size:18px; color:#bd7c87;}
-.label{font:9px Arial,sans-serif;text-transform:uppercase;letter-spacing:.18em;color:#91817e;margin-bottom:4px}
-.value{font:15px Arial,sans-serif;color:#f6f0ec}
-.quote{font:italic 14px/1.6 Georgia,serif;color:#c8b6b3;margin:23px 8px}
-.terms{border:1px solid #2d2224;border-radius:16px;padding:16px;text-align:left;font:12px/1.8 Arial,sans-serif;color:#b9aeaa;background:rgba(12,9,10,0.6)}
-.terms div:before{content:"✓";color:#d78393;margin-right:8px}
-.actions{display:grid;gap:10px;margin-top:20px}
-.action{border:1px solid #51383e;border-radius:13px;padding:14px;color:#fff;background:#120e0f;text-decoration:none;font:13px Arial,sans-serif;cursor:pointer; transition:0.3s;}
-.action.primary{background:linear-gradient(135deg,#922a40,#b33e56);border-color:#b33e56; box-shadow:0 5px 15px rgba(146,35,58,.2);}
-.action.primary:hover{transform:translateY(-2px); box-shadow:0 8px 25px rgba(146,35,58,.5), 0 0 15px rgba(179,62,86,0.4);}
-.action:not(.primary):hover{background:#1c1517; border-color:#6b4249;}
-
-.accepted{margin-top:17px;padding:16px;border-radius:14px;background:rgba(22,11,14,0.9);border:1px solid #8e4252;color:#e6a0ad;font:14px/1.7 Arial,sans-serif; animation:fade 0.5s ease;}
-.timer{margin-top:19px;font:10px Arial,sans-serif;color:#7f7470;letter-spacing:.08em}
 .toast{position:fixed;z-index:20;left:18px;right:18px;bottom:20px;margin:auto;max-width:430px;padding:14px 17px;border-radius:14px;background:#f3ece5;color:#171011;font:600 12px Arial,sans-serif;text-align:center;transform:translateY(130px);transition:.4s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
 .toast.show{transform:none}
-.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:15}.heart{position:absolute;top:-30px;animation:fall 3s linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
 </style>
 </head>
 <body>
 <div class="bg"></div><div class="noise"></div>
 
-<!-- GİRİŞ EKRANI -->
+<!-- ANKET GİRİŞ EKRANI -->
 <section id="intro" class="screen">
  <div class="card fade">
-  <div class="eyebrow">Enis Günay presents</div>
-  <div class="logo">✦</div>
-  <div class="eyebrow">Sunay Hanım'a özel</div>
-  <h1 style="margin-top:28px">Bu akşam için<br>küçük bir planım var.</h1>
-  <p>Fakat planın gerçekleşebilmesi için önce<br>çok önemli bir sorunun cevabı gerekiyor.</p>
-  <button class="btn primary" style="margin-top:25px" onclick="goNext('intro', 'question')">Devam et →</button>
+  <div class="eyebrow">Enis Günay Kalite Standartları</div>
+  <div class="logo">📋</div>
+  <h2>Buluşma Değerlendirme Formu</h2>
+  <p>Sunay Hanım merhaba. Hizmet kalitemizi artırmak ve müşteri memnuniyetini ölçmek adına bu kısa anketi doldurmanız zorunludur. (Evet, zorunlu. 😌)</p>
+  <button class="btn primary" style="margin-top:20px" onclick="goNext('intro', 'survey-screen')">Ankete Başla ✦</button>
  </div>
 </section>
 
-<!-- SORU EKRANI -->
-<section id="question" class="screen hidden">
- <button class="back-btn" onclick="goBack('question', 'intro')">← Geri</button>
- <div class="card fade">
-  <div class="eyebrow">Önemli soru</div>
-  <div class="logo">♡</div>
-  <h1>Sunay Hanım,<br>benimle buluşmak ister misiniz?</h1>
-  <p class="question">Cevabınızı dikkatli seçiniz. 👀</p>
-  <div class="btnrow">
-   <button class="btn primary" onclick="goNext('question', 'invite'); window.scrollTo({top:0,behavior:'smooth'});">Evet, isterim ♡</button>
-   <!-- Desktop'ta üzerine gelince, mobilde tıklayınca kaçması için iki event de eklendi -->
-   <button class="btn" id="noBtn" onmouseover="dodgeBtnHover()" onclick="nope()">Hayır</button>
-  </div>
-  <div class="tiny" id="hint">* Bu ekranda doğru cevabın bulunması önerilir.</div>
+<!-- ANKET SORULARI -->
+<section id="survey-screen" class="screen hidden">
+ <div class="card fade" style="text-align: left; padding: 30px 20px;">
+  <div class="eyebrow" style="text-align: center; margin-bottom: 15px;">Resmi Değerlendirme</div>
+  
+  <form id="dateSurvey">
+      <!-- Soru 1 -->
+      <div class="survey-group">
+          <div class="question-title">1. Buluşmaya genel puanınız nedir?</div>
+          <div class="stars">
+              <input type="radio" id="star5" name="q1" value="5 Yıldız" onclick="checkStar(5)">
+              <label for="star5">★</label>
+              <input type="radio" id="star4" name="q1" value="4 Yıldız" onclick="checkStar(4)">
+              <label for="star4">★</label>
+              <input type="radio" id="star3" name="q1" value="3 Yıldız" onclick="checkStar(3)">
+              <label for="star3">★</label>
+              <input type="radio" id="star2" name="q1" value="2 Yıldız" onclick="checkStar(2)">
+              <label for="star2">★</label>
+              <input type="radio" id="star1" name="q1" value="1 Yıldız" onclick="checkStar(1)">
+              <label for="star1">★</label>
+          </div>
+      </div>
+
+      <!-- Soru 2 -->
+      <div class="survey-group">
+          <div class="question-title">2. Enis'in performansı nasıldı?</div>
+          <label class="option-label">
+              <input type="radio" name="q2" value="Beklediğimden çok daha iyiydi">
+              <span class="checkmark"></span>
+              <span class="label-text">Beklediğimden çok daha iyiydi ✨</span>
+          </label>
+          <label class="option-label">
+              <input type="radio" name="q2" value="Zaten harika olacağını biliyordum">
+              <span class="checkmark"></span>
+              <span class="label-text">Zaten harika olacağını biliyordum 😎</span>
+          </label>
+          <label class="option-label">
+              <input type="radio" name="q2" value="Kusursuzdu, şikayet edecek bir şey bulamadım">
+              <span class="checkmark"></span>
+              <span class="label-text">Kusursuzdu, şikayet edecek bir şey bulamadım 🤍</span>
+          </label>
+      </div>
+
+      <!-- Soru 3 -->
+      <div class="survey-group">
+          <div class="question-title">3. Bir sonraki organizasyon ne zaman olsun?</div>
+          <label class="option-label">
+              <input type="radio" name="q3" value="Arayı çok açmayalım">
+              <span class="checkmark"></span>
+              <span class="label-text">Arayı çok açmayalım 📅</span>
+          </label>
+          <label class="option-label">
+              <input type="radio" name="q3" value="Hemen bu hafta sonu">
+              <span class="checkmark"></span>
+              <span class="label-text">Hemen bu hafta sonu 🏃‍♀️</span>
+          </label>
+          <label class="option-label">
+              <input type="radio" name="q3" value="Tarihleri ben seçeceğim">
+              <span class="checkmark"></span>
+              <span class="label-text">Tarihleri ben belirleyeceğim, VIP Randevu atacağım 💅</span>
+          </label>
+      </div>
+
+      <button type="button" class="btn primary" onclick="submitSurvey()">Sonuçları Merkeze Gönder 🚀</button>
+  </form>
  </div>
 </section>
 
-<!-- DAVETİYE EKRANI -->
-<section id="invite" class="screen hidden">
- <button class="back-btn" onclick="goBack('invite', 'question')">← Geri</button>
- <div class="card invite reveal">
-  <div class="eyebrow">Official date invitation</div>
-  <div class="orn">✦ ✦ ✦</div>
-  <h2>Buluşma Daveti</h2>
-  <div class="name">Sunay Güler Süy</div>
-  <p>Enis Günay tarafından, güzel vakit geçirme amacıyla hazırlanmış bu resmî olmayan davetiyedir.</p>
-  <div class="divider"></div>
-
-  <div class="details">
-   <div class="detail"><div class="icon">◷</div><div><div class="label">Saat</div><div class="value">19:00</div></div></div>
-   <div class="detail"><div class="icon">⌖</div><div><div class="label">Konum</div><div class="value">Cevizlibağ</div></div></div>
-   <div class="detail"><div class="icon">♡</div><div><div class="label">Davet eden</div><div class="value">Enis Günay</div></div></div>
-  </div>
-
-  <div class="quote">“Katılımınız, organizasyonun başarı oranını önemli ölçüde artıracaktır.”</div>
-
-  <div class="terms">
-   <div>Güzel vakit geçirme ihtimali kabul edilmiştir.</div>
-   <div>Gereksiz yere gülme ve birbirimize bakıp sırıtma riski vardır.</div>
-   <div>Enis'in kötü esprilerine maruz kalınabilir.</div>
-   <div>Akşamın beklenenden güzel geçmesi olasıdır.</div>
-   <div>Bir sonraki buluşmanın gündeme gelmesi mümkündür.</div>
-  </div>
-
-  <div class="actions">
-   <button class="action primary" onclick="accepted()">♡ Daveti Resmen Kabul Ediyorum</button>
-   <a class="action" href="https://www.google.com/maps/search/?api=1&query=Cevizliba%C4%9F%2C%20Istanbul" target="_blank">⌖ Cevizlibağ'ı Haritada Aç</a>
-  </div>
-
-  <div id="accepted" class="accepted hidden">
-   <strong>DAVET KABUL EDİLDİ. ❤️</strong><br>
-   19:00'da görüşürüz, Sunay Hanım.<br>
-   <span style="font-size:11px;color:#aa9894">Kabul ettiğiniz için teşekkür ederim, Akşam görüşmek üzere.</span>
-  </div>
-  <div class="timer">31 AĞUSTOS 2026 • 19:00</div>
- </div>
-</section>
-
-<div id="toast" class="toast"></div><div id="hearts" class="hearts"></div>
+<div id="toast" class="toast"></div>
 
 <script>
-let attempts=0;
-
-// İleri ve Geri fonksiyonları
+// Ekran geçiş fonksiyonu
 function goNext(current, nextScreen){
  document.getElementById(current).classList.add('hidden');
  const nextEl = document.getElementById(nextScreen);
  nextEl.classList.remove('hidden');
- // Tekrar açıldığında animasyonun tetiklenmesi için sınıfı yenile
- const card = nextEl.querySelector('.card');
- card.classList.remove('fade', 'reveal');
- void card.offsetWidth; // DOM'u resetle
- card.classList.add(nextScreen === 'invite' ? 'reveal' : 'fade');
 }
 
-function goBack(current, prevScreen){
- document.getElementById(current).classList.add('hidden');
- const prevEl = document.getElementById(prevScreen);
- prevEl.classList.remove('hidden');
- const card = prevEl.querySelector('.card');
- card.classList.remove('fade');
- void card.offsetWidth;
- card.classList.add('fade');
+// 5 yıldız harici basılmasını engelleme (Şaka kısmı)
+function checkStar(val) {
+    if(val < 5) {
+        document.getElementById('star5').checked = true; // Otomatik 5 yıldıza çeker
+        toast("Sistem Hatası: Enis Bey 5 yıldızdan azını kabul etmemektedir. 😌");
+    }
 }
 
-// Hayır butonunun fare üzerine gelince kaçması
-function dodgeBtnHover(){
- if(attempts < 4){
-  const b = document.getElementById('noBtn');
-  b.style.transform=`translate(${Math.random()*160-80}px,${Math.random()*100-50}px)`;
- }
-}
+// WhatsApp'a veri gönderme
+function submitSurvey(){
+    const q1 = document.querySelector('input[name="q1"]:checked');
+    const q2 = document.querySelector('input[name="q2"]:checked');
+    const q3 = document.querySelector('input[name="q3"]:checked');
 
-function nope(){
- attempts++;
- const b=document.getElementById('noBtn'), hint=document.getElementById('hint');
- const msgs=[
-  "Emin misiniz? 👀",
-  "Sunay Hanım, bir daha düşünseniz?",
-  "Enis Bey bu cevabı kabul etmiyor. 😔",
-  "Sistem hatası: 'Hayır' seçeneği bulunamadı.",
-  "Tamam tamam... Hayır butonu görevini bıraktı. 😌"
- ];
- toast(msgs[Math.min(attempts-1,msgs.length-1)]);
- if(attempts<5){
-   b.style.transform=`translate(${Math.random()*150-75}px,${Math.random()*90-45}px)`;
-   hint.textContent=attempts===4?"Son uyarı: Doğru buton kırmızı olan. ❤️":"* Sistem, kararınızı tekrar değerlendirmenizi rica ediyor.";
- }else{
-   b.textContent="Evet'e basıyorum 😌";
-   b.style.transform="none"; 
-   b.onmouseover = null; // Kaçmayı durdur
-   b.onclick = function() { 
-     goNext('question', 'invite'); 
-     window.scrollTo({top:0,behavior:'smooth'}); 
-   };
- }
-}
+    if(!q1 || !q2 || !q3){
+        toast("Lütfen tüm soruları dürüstçe yanıtlayınız. 👀");
+        return;
+    }
 
-function accepted(){
- document.getElementById('accepted').classList.remove('hidden');
- toast("Kayıtlara geçti. ❤️");
- const box=document.getElementById('hearts');
- for(let i=0;i<42;i++){
-  const h=document.createElement('div');h.className='heart';
-  h.textContent=['♥','♡','✦','✧'][Math.floor(Math.random()*4)];
-  h.style.left=Math.random()*100+'vw';
-  h.style.fontSize=(12+Math.random()*20)+'px';
-  h.style.color=['#b73e56','#8f263d','#f4eee7'][Math.floor(Math.random()*3)];
-  h.style.animationDelay=(Math.random()*1.3)+'s';
-  box.appendChild(h);
-  setTimeout(()=>h.remove(),4000);
- }
+    // -----------------------------------------------------------------
+    // LÜTFEN AŞAĞIDAKİ NUMARAYI KENDİ NUMARANIZ İLE DEĞİŞTİRİN
+    // Örnek: "905321234567" (Başında + veya boşluk olmadan)
+    // -----------------------------------------------------------------
+    const telefonNumarasi = "905462095552"; 
+
+    // WHATSAPP MESAJI TASLAĞI
+    let mesaj = `🚨 *YENİ ANKET SONUCU ULAŞTI* 🚨\n\n`;
+    mesaj += `Müşteri: *Sunay Hanım*\n\n`;
+    mesaj += `⭐ *Puan:* ${q1.value}\n`;
+    mesaj += `🗣️ *Performans Değerlendirmesi:*\n- ${q2.value}\n\n`;
+    mesaj += `📅 *İkinci Buluşma Talebi:*\n- ${q3.value}\n\n`;
+    mesaj += `_Sistem Notu: Kalite standartlarınızı koruduğunuz için tebrikler Enis Bey!_ 😎`;
+
+    // WHATSAPP LİNKİNİ OLUŞTUR VE AÇ
+    const whatsappLink = `https://wa.me/${telefonNumarasi}?text=${encodeURIComponent(mesaj)}`;
+    window.open(whatsappLink, '_blank');
 }
 
 function toast(t){
@@ -229,7 +207,7 @@ function toast(t){
  x.textContent=t;
  x.classList.add('show');
  clearTimeout(window.timer);
- window.timer=setTimeout(()=>x.classList.remove('show'),2200);
+ window.timer=setTimeout(()=>x.classList.remove('show'),3000);
 }
 </script>
 </body>
