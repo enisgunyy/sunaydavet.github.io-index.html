@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#090909">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>Buluşma Değerlendirme Formu</title>
+<title>Dün Akşamın Özeti</title>
 <style>
 :root{--bg:#070707;--paper:#f4eee7;--muted:#b8aaa5;--red:#9d3045;--red2:#c84b63;--line:#3b292d}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--paper)}
 body{font-family:Georgia,"Times New Roman",serif;overflow-x:hidden}
-.screen{min-height:100svh;display:flex;align-items:center;justify-content:center;padding:28px 19px;position:relative}
+.screen{min-height:100svh;display:flex;align-items:center;justify-content:center;padding:40px 19px;position:relative}
 
 /* Hareketli Arka Plan */
 .bg{position:fixed;inset:0;z-index:-3;background:radial-gradient(ellipse at 50% 15%,#3a171e 0,#170c10 40%,#070707 80%); background-size: 150% 150%; animation: pulseBg 12s ease-in-out infinite alternate;}
@@ -19,19 +19,19 @@ body{font-family:Georgia,"Times New Roman",serif;overflow-x:hidden}
 @keyframes floatLights { 0% { opacity: 0.7; transform: scale(1); } 100% { opacity: 1; transform: scale(1.1); } }
 
 .noise{position:fixed;inset:0;z-index:-2;opacity:.035;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.card{width:min(450px,100%);text-align:center; position: relative; border:1px solid #52383e;border-radius:28px;padding:34px 24px 26px;background:rgba(12,9,10,.78);box-shadow:0 30px 100px rgba(0,0,0,.8), inset 0 0 20px rgba(143,39,58,0.1);backdrop-filter:blur(15px)}
+.card{width:min(480px,100%);text-align:center; position: relative; border:1px solid #52383e;border-radius:28px;padding:34px 24px 26px;background:rgba(12,9,10,.78);box-shadow:0 30px 100px rgba(0,0,0,.8), inset 0 0 20px rgba(143,39,58,0.1);backdrop-filter:blur(15px); margin: 20px 0;}
 .fade{animation:fade 1s cubic-bezier(0.2, 0.8, 0.2, 1) both}
 @keyframes fade{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
 
 .eyebrow{font:10px Arial,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#b49fa0}
 .logo{margin:20px 0 15px;font-size:36px;line-height:1; text-shadow: 0 0 20px rgba(189,124,135,0.4);}
 h2{font-size:26px;font-weight:400;margin:8px 0 20px; color:#fff;}
-p{font:14px/1.75 Arial,sans-serif;color:#c9beb9;margin:10px 0}
-.divider{height:1px;background:linear-gradient(90deg,transparent,#6b4249,transparent);margin:20px 0}
+p{font:14.5px/1.75 Arial,sans-serif;color:#c9beb9;margin:10px 0}
+.divider{height:1px;background:linear-gradient(90deg,transparent,#6b4249,transparent);margin:25px 0}
 
 /* Anket Soruları */
-.survey-group { text-align: left; margin-bottom: 25px; }
-.question-title { font-size: 15px; font-weight: bold; color: #f4eee7; margin-bottom: 12px; font-family: Georgia, serif; }
+.survey-group { text-align: left; margin-bottom: 28px; }
+.question-title { font-size: 15px; font-weight: bold; color: #f4eee7; margin-bottom: 14px; font-family: Georgia, serif; line-height: 1.4; }
 
 /* Özel Radyo Butonları */
 .option-label {
@@ -42,7 +42,7 @@ p{font:14px/1.75 Arial,sans-serif;color:#c9beb9;margin:10px 0}
     border-radius: 12px;
     background: rgba(20, 15, 16, 0.6);
     color: #c9beb9;
-    font: 13px Arial, sans-serif;
+    font: 13.5px/1.5 Arial, sans-serif;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
@@ -50,7 +50,7 @@ p{font:14px/1.75 Arial,sans-serif;color:#c9beb9;margin:10px 0}
 }
 .option-label:hover { border-color: #6b4249; background: rgba(30, 20, 22, 0.8); transform: translateX(3px); }
 .option-label input { position: absolute; opacity: 0; cursor: pointer; }
-.checkmark { position: absolute; top: 13px; left: 15px; height: 18px; width: 18px; background-color: #1a1214; border: 1px solid #51383e; border-radius: 50%; transition: 0.3s; }
+.checkmark { position: absolute; top: 50%; transform: translateY(-50%); left: 15px; height: 18px; width: 18px; background-color: #1a1214; border: 1px solid #51383e; border-radius: 50%; transition: 0.3s; }
 .option-label input:checked ~ .checkmark { background-color: #b73e56; border-color: #b73e56; box-shadow: 0 0 10px rgba(183,62,86,0.5); }
 .option-label input:checked ~ .checkmark:after { content: ""; position: absolute; display: block; top: 5px; left: 5px; width: 6px; height: 6px; border-radius: 50%; background: white; }
 .option-label input:checked ~ .label-text { color: #fff; font-weight: bold; }
@@ -58,11 +58,28 @@ p{font:14px/1.75 Arial,sans-serif;color:#c9beb9;margin:10px 0}
 /* Puanlama Yıldızları */
 .stars { display: flex; gap: 5px; justify-content: center; flex-direction: row-reverse; margin-bottom: 15px; }
 .stars input { display: none; }
-.stars label { font-size: 30px; color: #3b292d; cursor: pointer; transition: 0.3s; }
+.stars label { font-size: 34px; color: #3b292d; cursor: pointer; transition: 0.3s; }
 .stars label:hover, .stars label:hover ~ label, .stars input:checked ~ label { color: #b73e56; text-shadow: 0 0 15px rgba(183,62,86,0.6); }
 
+/* Textarea */
+textarea { 
+    width: 100%; 
+    background: rgba(14,11,12,0.8); 
+    border: 1px solid #52383e; 
+    border-radius: 14px; 
+    padding: 16px; 
+    color: #f4eee7; 
+    font-size: 14px;
+    font-family: Arial, sans-serif; 
+    outline: none; 
+    transition: 0.3s; 
+    resize: vertical; 
+    min-height: 90px;
+}
+textarea:focus { border-color: #b73e56; box-shadow: 0 0 15px rgba(183,62,86,0.2); background: rgba(20,15,17,0.9); }
+
 /* Buton ve Parlama Efektleri */
-.btn{appearance:none;border:1px solid #51383e;background:#140f10;color:#fff;border-radius:999px;padding:16px 25px;font: 14px Arial,sans-serif; font-weight:bold; cursor:pointer;transition:all .3s cubic-bezier(0.25, 0.8, 0.25, 1);width:100%; margin-top:10px;}
+.btn{appearance:none;border:1px solid #51383e;background:#140f10;color:#fff;border-radius:999px;padding:16px 25px;font: 14px Arial,sans-serif; font-weight:bold; cursor:pointer;transition:all .3s cubic-bezier(0.25, 0.8, 0.25, 1);width:100%; margin-top:15px;}
 .btn.primary{background:linear-gradient(135deg,#8f263d,#b73e56);border-color:#b3485c;box-shadow:0 8px 25px rgba(146,35,58,.3), 0 0 15px rgba(183,62,86,0.2);}
 .btn.primary:hover{transform:translateY(-2px) scale(1.02); box-shadow:0 12px 30px rgba(146,35,58,.5), 0 0 25px rgba(183,62,86,0.6);}
 .btn:active{transform:scale(.95)!important;}
@@ -78,23 +95,23 @@ p{font:14px/1.75 Arial,sans-serif;color:#c9beb9;margin:10px 0}
 <!-- ANKET GİRİŞ EKRANI -->
 <section id="intro" class="screen">
  <div class="card fade">
-  <div class="eyebrow">Enis Günay Kalite Standartları</div>
-  <div class="logo">📋</div>
-  <h2>Buluşma Değerlendirme Formu</h2>
-  <p>Sunay Hanım merhaba. Hizmet kalitemizi artırmak ve müşteri memnuniyetini ölçmek adına bu kısa anketi doldurmanız zorunludur. (Evet, zorunlu. 😌)</p>
-  <button class="btn primary" style="margin-top:20px" onclick="goNext('intro', 'survey-screen')">Ankete Başla ✦</button>
+  <div class="eyebrow">Dün Akşamın Yankıları</div>
+  <div class="logo">🍷</div>
+  <h2>Günün Değerlendirmesi</h2>
+  <p>Sunay, dün akşam gerçekten çok güzeldi. <br><br>Peki senin pencerenden nasıldı? İçinden geçenleri öğrenmek için tamamen tarafsız (ve tabii ki beni övmeye yönelik) bu ufak testi çözmeni rica ediyorum.</p>
+  <button class="btn primary" style="margin-top:20px" onclick="goNext('intro', 'survey-screen')">İtiraflara Başla ♡</button>
  </div>
 </section>
 
 <!-- ANKET SORULARI -->
 <section id="survey-screen" class="screen hidden">
- <div class="card fade" style="text-align: left; padding: 30px 20px;">
-  <div class="eyebrow" style="text-align: center; margin-bottom: 15px;">Resmi Değerlendirme</div>
+ <div class="card fade" style="text-align: left; padding: 35px 24px;">
+  <div class="eyebrow" style="text-align: center; margin-bottom: 20px;">Gizli Rapor</div>
   
   <form id="dateSurvey">
       <!-- Soru 1 -->
       <div class="survey-group">
-          <div class="question-title">1. Buluşmaya genel puanınız nedir?</div>
+          <div class="question-title">1. Öncelikle dünkü buluşmaya genel puanın?</div>
           <div class="stars">
               <input type="radio" id="star5" name="q1" value="5 Yıldız" onclick="checkStar(5)">
               <label for="star5">★</label>
@@ -111,45 +128,71 @@ p{font:14px/1.75 Arial,sans-serif;color:#c9beb9;margin:10px 0}
 
       <!-- Soru 2 -->
       <div class="survey-group">
-          <div class="question-title">2. Enis'in performansı nasıldı?</div>
+          <div class="question-title">2. Dün akşamın senin için en güzel detayı neydi?</div>
           <label class="option-label">
-              <input type="radio" name="q2" value="Beklediğimden çok daha iyiydi">
+              <input type="radio" name="q2" value="Sohbetin hiç tıkanmadan su gibi akıp gitmesi">
               <span class="checkmark"></span>
-              <span class="label-text">Beklediğimden çok daha iyiydi ✨</span>
+              <span class="label-text">Sohbetin hiç tıkanmadan su gibi akıp gitmesi ✨</span>
           </label>
           <label class="option-label">
-              <input type="radio" name="q2" value="Zaten harika olacağını biliyordum">
+              <input type="radio" name="q2" value="Gülmekten yanaklarımın ağrıması">
               <span class="checkmark"></span>
-              <span class="label-text">Zaten harika olacağını biliyordum 😎</span>
+              <span class="label-text">Gülmekten yanaklarımın ağrıması 😌</span>
           </label>
           <label class="option-label">
-              <input type="radio" name="q2" value="Kusursuzdu, şikayet edecek bir şey bulamadım">
+              <input type="radio" name="q2" value="Birlikte geçirdiğimiz her an">
               <span class="checkmark"></span>
-              <span class="label-text">Kusursuzdu, şikayet edecek bir şey bulamadım 🤍</span>
+              <span class="label-text">Birlikte geçirdiğimiz her an 🤍</span>
           </label>
       </div>
 
       <!-- Soru 3 -->
       <div class="survey-group">
-          <div class="question-title">3. Bir sonraki organizasyon ne zaman olsun?</div>
+          <div class="question-title">3. Karşımda otururken içinden en çok hangisi geçti?</div>
           <label class="option-label">
-              <input type="radio" name="q3" value="Arayı çok açmayalım">
+              <input type="radio" name="q3" value="Zaman ne kadar da çabuk geçti...">
               <span class="checkmark"></span>
-              <span class="label-text">Arayı çok açmayalım 📅</span>
+              <span class="label-text">"Zaman ne kadar da çabuk geçti..." ⏳</span>
           </label>
           <label class="option-label">
-              <input type="radio" name="q3" value="Hemen bu hafta sonu">
+              <input type="radio" name="q3" value="Beklediğimden çok daha uyumluymuşuz">
               <span class="checkmark"></span>
-              <span class="label-text">Hemen bu hafta sonu 🏃‍♀️</span>
+              <span class="label-text">"Beklediğimden çok daha uyumluymuşuz." 👀</span>
           </label>
           <label class="option-label">
-              <input type="radio" name="q3" value="Tarihleri ben seçeceğim">
+              <input type="radio" name="q3" value="Acaba bir sonraki sefere nereye gitsek?">
               <span class="checkmark"></span>
-              <span class="label-text">Tarihleri ben belirleyeceğim, VIP Randevu atacağım 💅</span>
+              <span class="label-text">"Acaba bir sonraki sefere nereye gitsek?" 🤫</span>
           </label>
       </div>
 
-      <button type="button" class="btn primary" onclick="submitSurvey()">Sonuçları Merkeze Gönder 🚀</button>
+      <!-- Soru 4 -->
+      <div class="survey-group">
+          <div class="question-title">4. Gelelim o kritik soruya... İkinci buluşma için ne diyorsun?</div>
+          <label class="option-label">
+              <input type="radio" name="q4" value="Arayı hiç soğutmadan plan yapalım">
+              <span class="checkmark"></span>
+              <span class="label-text">Arayı hiç soğutmadan plan yapalım. 📅</span>
+          </label>
+          <label class="option-label">
+              <input type="radio" name="q4" value="Mekanları sen seç, ben hazırım">
+              <span class="checkmark"></span>
+              <span class="label-text">Mekanları sen seç, ben dünden hazırım. 🥂</span>
+          </label>
+          <label class="option-label">
+              <input type="radio" name="q4" value="Bu sefer sürpriz yapma sırası bende">
+              <span class="checkmark"></span>
+              <span class="label-text">Bu sefer sürpriz yapma sırası bende! 💅</span>
+          </label>
+      </div>
+
+      <!-- Soru 5 (Opsiyonel Not) -->
+      <div class="survey-group">
+          <div class="question-title">5. Son olarak, bana söylemek/yazmak istediğin bir şey?</div>
+          <textarea id="customNote" placeholder="İçinden gelenleri buraya dökebilirsin..."></textarea>
+      </div>
+
+      <button type="button" class="btn primary" onclick="submitSurvey()">Bana Gönder ❤️</button>
   </form>
  </div>
 </section>
@@ -157,18 +200,18 @@ p{font:14px/1.75 Arial,sans-serif;color:#c9beb9;margin:10px 0}
 <div id="toast" class="toast"></div>
 
 <script>
-// Ekran geçiş fonksiyonu
 function goNext(current, nextScreen){
  document.getElementById(current).classList.add('hidden');
  const nextEl = document.getElementById(nextScreen);
  nextEl.classList.remove('hidden');
+ window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// 5 yıldız harici basılmasını engelleme (Şaka kısmı)
+// 5 yıldız harici basılmasını engelleme (Tatlı şaka)
 function checkStar(val) {
     if(val < 5) {
-        document.getElementById('star5').checked = true; // Otomatik 5 yıldıza çeker
-        toast("Sistem Hatası: Enis Bey 5 yıldızdan azını kabul etmemektedir. 😌");
+        document.getElementById('star5').checked = true;
+        toast("Uyarı: Enis'in kalbi 5 yıldızdan azını kaldıramayacak kadar hassas. 🥺");
     }
 }
 
@@ -177,9 +220,11 @@ function submitSurvey(){
     const q1 = document.querySelector('input[name="q1"]:checked');
     const q2 = document.querySelector('input[name="q2"]:checked');
     const q3 = document.querySelector('input[name="q3"]:checked');
+    const q4 = document.querySelector('input[name="q4"]:checked');
+    const note = document.getElementById('customNote').value;
 
-    if(!q1 || !q2 || !q3){
-        toast("Lütfen tüm soruları dürüstçe yanıtlayınız. 👀");
+    if(!q1 || !q2 || !q3 || !q4){
+        toast("Lütfen hiçbir soruyu atlamadan içinden geçenleri seç. 👀");
         return;
     }
 
@@ -189,13 +234,17 @@ function submitSurvey(){
     // -----------------------------------------------------------------
     const telefonNumarasi = "905462095552"; 
 
-    // WHATSAPP MESAJI TASLAĞI
-    let mesaj = `🚨 *YENİ ANKET SONUCU ULAŞTI* 🚨\n\n`;
-    mesaj += `Müşteri: *Sunay Hanım*\n\n`;
-    mesaj += `⭐ *Puan:* ${q1.value}\n`;
-    mesaj += `🗣️ *Performans Değerlendirmesi:*\n- ${q2.value}\n\n`;
-    mesaj += `📅 *İkinci Buluşma Talebi:*\n- ${q3.value}\n\n`;
-    mesaj += `_Sistem Notu: Kalite standartlarınızı koruduğunuz için tebrikler Enis Bey!_ 😎`;
+    // WHATSAPP MESAJI TASLAĞI (Sanki Sunay kendi elleriyle yazıp atmış gibi)
+    let mesaj = `💌 *DÜN AKŞAMIN RAPORU* 💌\n`;
+    mesaj += `Gönderen: Sunay ✨\n\n`;
+    mesaj += `⭐ *Puanım:* ${q1.value} (Mecburen değil, gerçekten!)\n`;
+    mesaj += `✨ *En güzel detay:* ${q2.value}\n`;
+    mesaj += `💭 *Aklımdan geçen:* ${q3.value}\n`;
+    mesaj += `📅 *İkinci buluşma:* ${q4.value}\n`;
+    
+    if(note.trim() !== ""){
+        mesaj += `\n📝 *Sana notum:* ${note}`;
+    }
 
     // WHATSAPP LİNKİNİ OLUŞTUR VE AÇ
     const whatsappLink = `https://wa.me/${telefonNumarasi}?text=${encodeURIComponent(mesaj)}`;
@@ -207,7 +256,7 @@ function toast(t){
  x.textContent=t;
  x.classList.add('show');
  clearTimeout(window.timer);
- window.timer=setTimeout(()=>x.classList.remove('show'),3000);
+ window.timer=setTimeout(()=>x.classList.remove('show'),3500);
 }
 </script>
 </body>
